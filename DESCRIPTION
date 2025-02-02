@@ -1,0 +1,26 @@
+Package: fibos
+Title: Occlusion Surface Using the Occluded Surface and Fibonacci Occluded Surface
+Version: 1.0.0.9
+Authors@R: c(person("Herson Hebert", "Mendes Soares", email = "hersonhebert@hotmail.com", role = c("aut","cre")),
+            person("Posit Software, PBC", role = c("cph", "fnd")))
+Maintainer: Herson Hebert Mendes Soares <hersonhebert@hotmail.com>
+Description: The fibos package contains the implementation of important 
+             methodologies for bioinformatics, the first being the Occluded
+             Surface, created by Patrick Fleming, and the second methodology, 
+             the Fibonacci Occluded Surface, created with a new approach to dot 
+             distribution on an atom.
+Depends: R (>= 3.3.0)
+License: GPL-3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+OS_type: unix
+Imports: 
+    bio3d,
+    dplyr,
+    readr,
+    stringr,
+    tidyr,
+    withr,
+    fs
+NeedsCompilation: yes
