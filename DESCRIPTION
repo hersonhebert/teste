@@ -1,6 +1,6 @@
 Package: fibos
 Title: Occlusion Surface Using the Occluded Surface and Fibonacci Occluded Surface
-Version: 1.0.0.9
+Version: 1.2.0
 Authors@R: c(person("Herson Hebert", "Mendes Soares", email = "hersonhebert@hotmail.com", role = c("aut","cre")),
             person("Posit Software, PBC", role = c("cph", "fnd")))
 Maintainer: Herson Hebert Mendes Soares <hersonhebert@hotmail.com>
@@ -14,7 +14,6 @@ License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-OS_type: unix
 Imports: 
     bio3d,
     dplyr,
@@ -22,5 +21,7 @@ Imports:
     stringr,
     tidyr,
     withr,
-    fs
+    fs,
+    devtools,
+    reticulate
 NeedsCompilation: yes

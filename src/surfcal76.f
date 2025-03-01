@@ -61,7 +61,7 @@ c**********************************************************************
        character*9 dumyc1,predumy
        integer resno,secsq,numat,seqcd,first,rayflag
        integer dummy
-       integer::kanal=130
+       integer::kanal = 115
        character *3 resn,secnm
 
 
