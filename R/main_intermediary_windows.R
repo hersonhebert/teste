@@ -23,39 +23,48 @@
 
 #'
 execute_windows = function(pdb, method){
-  python_ok <- tryCatch({
-    reticulate::py_config()
-    TRUE
-  }, error = function(e) FALSE)
-  if (!python_ok) {
-    stop("Python not found.")
-#    reticulate::install_python()
-#    reticulate::py_config()
-    
+  # Caminho do ambiente virtual
+  options(reticulate.convert = TRUE)
+  venv_path <- fs::path_real(".")
+  venv_path <- fs::path(venv_path, ".virtualenvs", "r-reticulate")
+  python_exe <- fs::path(venv_path, "Scripts", "python.exe")
+  
+  # Criar ambiente virtual se não existir
+  if (!dir.exists(venv_path)) {
+    system2("python", c("-m", "venv", shQuote(venv_path)))
   }
-  if (!reticulate::py_module_available("fibos")) {
-      reticulate::py_install("fibos")
+  reticulate::use_virtualenv(venv_path, required = TRUE)
+  if(!reticulate::py_module_available("fibos")){
+    system2(python_exe, c("-m", "pip", "install", "fibos"))
   }
-  fibos = reticulate::import("fibos")
-  result_occluded = fibos$occluded_surface(pdb,method)
-  return(result_occluded)
+  python = reticulate::import("fibos")
+  python$occluded_surface(pdb,method)
+  if(tolower(fs::path_ext(pdb))=="pdb"){
+    pdb = fs::path_ext_remove(pdb)
+  }
+  prot = paste("prot_",pdb, sep = "")
+  prot = fs::path_ext_set(prot,"srf")
+  prot = fs::path("fibos_files",prot)
+  return(read_prot(prot))
 }
 
 osp_windows = function(file){
-  python_ok <- tryCatch({
-    reticulate::py_config()
-    TRUE
-  }, error = function(e) FALSE)
-  if (!python_ok) {
-    message("Python not found.")
-    reticulate::install_python()
-    reticulate::use_python(python_binary_path(), required = TRUE)
-    reticulate::py_config()
+  # Caminho do ambiente virtual
+  venv_path <- fs::path_real(".")
+  venv_path <- fs::path(venv_path, ".virtualenvs", "r-reticulate")
+  python_exe <- fs::path(venv_path, "Scripts", "python.exe")
+  
+  # Criar ambiente virtual se não existir
+  if (!dir.exists(venv_path)) {
+    system2("python", c("-m", "venv", shQuote(venv_path)))
   }
-  if (!reticulate::py_module_available("fibos")) {
-    reticulate::py_install("fibos")
+  reticulate::use_virtualenv(venv_path, required = TRUE)
+  if(!reticulate::py_module_available("fibos")){
+    system2(python_exe, c("-m", "pip", "install", "fibos"))
   }
-  fibos = reticulate::import("fibos")
-  result_osp = fibos$osp(file)
-  return(result_osp)
+  python = reticulate::import("fibos")
+  result = python$osp(file)
+  file = fs::path_ext_remove(file)
+  file = fs::path_ext_set(file,"pak")
+  return(read_osp(file))
 }

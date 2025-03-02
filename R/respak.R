@@ -89,7 +89,7 @@ osp = function(file){
     return(osp_data)
   }
   else{
-    osp_windows(file)
+    return(osp_windows(file))
   }
 }
 

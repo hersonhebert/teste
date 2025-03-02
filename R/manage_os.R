@@ -46,7 +46,7 @@ occluded_surface = function(pdb, method = "FIBOS", verbose = FALSE){
   meth = 1
   verbose = FALSE
   system_arch_1 = Sys.info()
-  if(system_arch_1["sysname"] == "Linux"||system_arch_1["sysname"] == "Darwin"){
+  if(system_arch_1["sysname"] == "Darwin"){
     if(verbose == TRUE){
       print("Relizando limpeza de arquivos.")
     }
@@ -160,7 +160,7 @@ occluded_surface = function(pdb, method = "FIBOS", verbose = FALSE){
     })
   }
   else{
-    message("Not supported.")
+    return(execute_windows(pdb,method))
   }
 }
 
