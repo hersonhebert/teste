@@ -39,6 +39,8 @@
 #'
 #' @export
 osp = function(file){
+  system_arch_1 = Sys.info()
+  if(system_arch_1["sysname"] == "Darwin"){
   wd = fs::path_wd()
   if(!fs::dir_exists("fibos_files")){
     fs::dir_create("fibos_files")
@@ -61,14 +63,9 @@ osp = function(file){
       fs::file_move(file,"prot.srf")
       file = "prot.srf"
     }
-    system_arch_1 = Sys.info()
-    if(system_arch_1["sysname"] == "Darwin"){
+  }
       #dyn.load(system.file("libs", "fibos.so", package = "fibos"))
       dyn.load(fs::path_package("fibos","libs","fibos.so"))
-    } else{
-      path_lib = fs::path("libs",.Platform$r_arch)
-      dyn.load(fs::path_package("fibos",path_lib,"fibos.dll"))
-    }
     .Fortran("respak", PACKAGE = "fibos")
     if(system_arch_1["sysname"] == "Linux"||system_arch_1["sysname"] == "Darwin"){
       dyn.unload(fs::path_package("fibos","libs","fibos.so"))
@@ -88,7 +85,7 @@ osp = function(file){
     fs::file_copy(file,"fibos_files", overwrite = TRUE)
     fs::file_delete(file)
     return(osp_data)
-  }
+    }
   else{
     return(osp_windows(file))
   }
@@ -113,6 +110,6 @@ read_osp = function(prot_file){
   if(file.exists(prot_file) ==  FALSE){
     stop("File not Found: ", prot_file)
   }
-  osp_data = readr::read_table(file, show_col_types = FALSE)
+  osp_data = readr::read_table(prot_file, show_col_types = FALSE)
   return(osp_data)
 }
