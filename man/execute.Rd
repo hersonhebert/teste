@@ -19,6 +19,10 @@ execute_windows(pdb, method)
 \item{maxres}{Maximum number of residues.}
 
 \item{maxat}{Maximum number of atoms.}
+
+\item{pdb}{4-digit PDB id (will fetch it from the RCSB repository) or the path to a PDB local file.}
+
+\item{method}{Method to be used: OS (classic) or FIBOS (default).The classic OS covers the surface radially with one of the axes as a reference when allocating the dots. In FIBOS, Fibonacci spirals were used to allocate the dots, which is known to produce lower axial anisotropy as well as more evenly spaced points on a sphere.}
 }
 \description{
 The implemented function executes the implemented methods.
@@ -36,13 +40,6 @@ applying the Fibonacci OS methodology. At the end of the method
 execution, the "prot.srf" file is generated, and returned for
 the function. The data in this file refers to all contacts
 between atoms of molecules present in a protein's PDB.
-}
-\seealso{
-\code{\link[=read_prot]{read_prot()}}
-
-\code{\link[=read_osp]{read_osp()}}
-
-\code{\link[=occluded_surface]{occluded_surface()}}
 }
 \author{
 Carlos Henrique da Silveira (carlos.silveira@unifei.edu.br)

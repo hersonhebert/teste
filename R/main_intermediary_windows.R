@@ -1,5 +1,8 @@
 #' @title Surface Calc
 #' @name execute
+#' 
+#' @param pdb 4-digit PDB id (will fetch it from the RCSB repository) or the path to a PDB local file.
+#' @param method Method to be used: OS (classic) or FIBOS (default).The classic OS covers the surface radially with one of the axes as a reference when allocating the dots. In FIBOS, Fibonacci spirals were used to allocate the dots, which is known to produce lower axial anisotropy as well as more evenly spaced points on a sphere.
 #'
 #' @description The implemented function executes the implemented methods.
 #'              Using this function, it is possible to calculate occluded areas
@@ -10,9 +13,6 @@
 #'              between atoms of molecules present in a protein's PDB.
 #'
 #'
-#' @seealso [read_prot()]
-#' @seealso [read_osp()]
-#' @seealso [occluded_surface()]
 #'
 #' @importFrom stats rnorm
 #'

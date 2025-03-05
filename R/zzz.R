@@ -1,19 +1,16 @@
 .onLoad <- function(libname, pkgname) {
   # Carrega o pacote reticulate
   if (!requireNamespace("reticulate", quietly = TRUE)) {
-    stop("O pacote 'reticulate' é necessário, mas não está instalado.")
+    stop("Reticulate not Found.")
   }
   
-  # Verifica se o Python está disponível
+  # Verifica se o Python esta disponível
   if (!reticulate::py_available(initialize = TRUE)) {
-    stop("Python não encontrado.")
+    stop("Python not found.")
   }
   
-  # Verifica se o ambiente virtual 'meu_ambiente' já existe
   if (!reticulate::virtualenv_exists("fibos_venv")) {
-#    message("Criando ambiente virtual 'meu_ambiente'...")
     reticulate::virtualenv_create("fibos_venv")
-#    message("Instalando o pacote Python no ambiente virtual...")
     reticulate::virtualenv_install("fibos_venv", packages = "fibos")
   }
   
