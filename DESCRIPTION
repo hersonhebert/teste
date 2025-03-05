@@ -25,3 +25,4 @@ Imports:
     devtools,
     reticulate
 NeedsCompilation: yes
+Config/Windows/configure: configure.win
