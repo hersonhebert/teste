@@ -19,14 +19,11 @@
 #}
 
 .onLoad <- function(libname, pkgname) {
-  # Carrega o pacote reticulate
   if (!requireNamespace("reticulate", quietly = TRUE)) {
-    stop("O pacote 'reticulate' é necessário, mas não está instalado.")
+    stop("Reticulate not found.")
   }
   
-  # Declara a dependência do pacote Python 'fibos'
   reticulate::py_require("fibos")
   
-  # Importa o módulo Python 'fibos' com carregamento adiado
   fibos <<- reticulate::import("fibos", delay_load = TRUE)
 }
