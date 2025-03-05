@@ -23,19 +23,6 @@
 
 #'
 execute_windows = function(pdb, method){
-  options(reticulate.convert = TRUE)
-  
-  venv_path <- fs::path_real(".")
-  venv_path <- fs::path(venv_path, ".virtualenvs", "r-reticulate")
-  python_exe <- fs::path(venv_path, "Scripts", "python.exe")
-  if (!dir.exists(venv_path)) {
-    system2("python", c("-m", "venv", shQuote(venv_path)))
-  }
-  
-  # Verifica se o Python está corretamente configurado
-  reticulate::py_config()
-  
-  # Importa o pacote fibos e executa a função
   python = reticulate::import("fibos")
   python$occluded_surface(pdb, method)
   
@@ -51,15 +38,6 @@ execute_windows = function(pdb, method){
 }
 
 osp_windows = function(file){
-  options(reticulate.convert = TRUE)
-  venv_path <- fs::path_real(".")
-  venv_path <- fs::path(venv_path, ".virtualenvs", "r-reticulate")
-  python_exe <- fs::path(venv_path, "Scripts", "python.exe")
-  if (!dir.exists(venv_path)) {
-    system2("python", c("-m", "venv", shQuote(venv_path)))
-  }
-  reticulate::use_virtualenv(venv_path, required = TRUE)
-  reticulate::py_config()
   python = reticulate::import("fibos")
   result = python$osp(file)
   file = fs::path_ext_remove(file)
