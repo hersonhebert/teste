@@ -22,7 +22,9 @@
   if (!requireNamespace("reticulate", quietly = TRUE)) {
     stop("Reticulate not found.")
   }
-  
+  if (Sys.which("python") == ""){
+    stop("Python not found.")
+  }
   reticulate::py_require("fibos")
   
   fibos <<- reticulate::import("fibos", delay_load = TRUE)

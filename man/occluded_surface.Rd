@@ -4,14 +4,12 @@
 \alias{occluded_surface}
 \title{Occluded Surface (OS)}
 \usage{
-occluded_surface(pdb, method = "FIBOS", verbose = FALSE)
+occluded_surface(pdb, method = "FIBOS")
 }
 \arguments{
 \item{pdb}{4-digit PDB id (will fetch it from the RCSB repository) or the path to a PDB local file.}
 
 \item{method}{Method to be used: OS (classic) or FIBOS (default).The classic OS covers the surface radially with one of the axes as a reference when allocating the dots. In FIBOS, Fibonacci spirals were used to allocate the dots, which is known to produce lower axial anisotropy as well as more evenly spaced points on a sphere.}
-
-\item{verbose}{only for debugging.}
 }
 \value{
 A table containing:

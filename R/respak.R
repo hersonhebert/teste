@@ -39,56 +39,7 @@
 #'
 #' @export
 osp = function(file){
-  system_arch_1 = Sys.info()
-  if(system_arch_1["sysname"] == "Darwin"){
-  wd = fs::path_wd()
-  if(!fs::dir_exists("fibos_files")){
-    fs::dir_create("fibos_files")
-  }
-  if(fs::path_ext(file) == ""){
-    file = fs::path_ext_set(file,"srf")
-  }
-  if(!fs::path_ext(file) == "srf"){
-    stop("Type of File Wrong")
-  }
-  if(fs::file_exists(file) == FALSE){
-    stop("File not Found: ",file)
-  }
-  name_prot = file
-  if(fs::file_exists(file)){
-    if(file!="prot.srf"){
-      fs::file_copy(file,".")
-      file = fs::path_file(file)
-      file = fs::path(wd,file)
-      fs::file_move(file,"prot.srf")
-      file = "prot.srf"
-    }
-  }
-      #dyn.load(system.file("libs", "fibos.so", package = "fibos"))
-      dyn.load(fs::path_package("fibos","libs","fibos.so"))
-    .Fortran("respak", PACKAGE = "fibos")
-    if(system_arch_1["sysname"] == "Linux"||system_arch_1["sysname"] == "Darwin"){
-      dyn.unload(fs::path_package("fibos","libs","fibos.so"))
-    } else{
-      path_lib = fs::path("libs",.Platform$r_arch)
-      dyn.unload(fs::path_package("fibos",path_lib,"fibos.dll"))
-    }
-    osp_data = readr::read_table("prot.pak",show_col_types = FALSE)
-    name_prot = fs::path_file(name_prot)
-    name_prot = fs::path_ext_remove(name_prot)
-    name_prot = stringr::str_sub(name_prot, -4)
-    file = paste("respack_",name_prot,sep = "")
-    file = fs::path_ext_set(file,"pak")
-    fs::file_move("prot.pak",file)
-    remove_file = fs::dir_ls(glob = "*.srf")
-    fs::file_delete(remove_file)
-    fs::file_copy(file,"fibos_files", overwrite = TRUE)
-    fs::file_delete(file)
-    return(osp_data)
-    }
-  else{
     return(osp_windows(file))
-  }
 }
 
 # #' @title Read OSP Value
